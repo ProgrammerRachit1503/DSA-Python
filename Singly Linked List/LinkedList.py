@@ -10,17 +10,17 @@ class LinkedList:
     self.tail : Node = new_node
     self.length : int = 1
   
-  def print_list(self) -> None: #Prints list
+  def print_list(self) -> None:
     temp : Node = self.head
     while temp is not None:
       print(temp.value, end=" -> ")
       temp = temp.next
     print(None)
 
-  def append(self, value : any) -> bool:  #Insert at end
+  def append(self, value : any) -> bool:
     new_node : Node = Node(value)
     
-    if self.head is None: #checks for empty list
+    if self.head is None:
       self.head = new_node
       self.tail = new_node
     else: 
@@ -30,23 +30,24 @@ class LinkedList:
     self.length += 1
     return True
   
-  def pop(self) -> Node: #Delete at end
+  def pop(self) -> Node | None:
     if self.length == 0:
       return None
     temp : Node = self.head
     prev : Node = self.head
-    while(temp.next):
-      prev = temp
-      temp = temp.next
-    self.tail = prev
-    self.tail.next = None
-    self.length -= 1
-    if self.length == 0:
+    if self.length == 1:
       self.head = None
       self.tail = None
+    else:
+      while(temp.next):
+        prev = temp
+        temp = temp.next
+      self.tail = prev
+      self.tail.next = None
+    self.length -= 1
     return temp
   
-  def prepend(self, value : any) -> bool: #Insert at begin
+  def prepend(self, value : any) -> bool:
     new_node : Node = Node(value)
     new_node.next = self.head
     self.head = new_node
@@ -55,7 +56,7 @@ class LinkedList:
     self.length += 1
     return True
   
-  def pop_first(self) -> Node:
+  def pop_first(self) -> Node | None:
       if self.length == 0:
         return None
       
@@ -96,7 +97,7 @@ class LinkedList:
     self.length += 1
     return True
   
-  def remove(self, index : int) -> Node:
+  def remove(self, index : int) -> Node | None:
     if index >= self.length or index < 0:
       return None
     if index == 0:
@@ -122,7 +123,7 @@ class LinkedList:
       before = temp
       temp = after
 
-  def make_empty(self):
+  def make_empty(self) -> None:
     self.head = None
     self.tail = None
     self.length = 0
@@ -131,14 +132,7 @@ class LinkedList:
 
 
 def main() -> None:
-  my_linked_list = LinkedList(1)
-  my_linked_list.append(2)
-  my_linked_list.append(3)
-  my_linked_list.append(4)
-  my_linked_list.append(5)
-  my_linked_list.append(5)
-
-  print( my_linked_list.find_middle_node().value )
+  pass
 
 
 if __name__ == "__main__":
