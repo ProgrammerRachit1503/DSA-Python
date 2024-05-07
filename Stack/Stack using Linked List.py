@@ -45,6 +45,10 @@ class Stack:
   
   def size(self) -> int:
     return self.height
+  
+  def make_empty(self) -> None :
+    self.top = None
+    self.height = 0
 
 def main() -> None:
   pass

@@ -31,6 +31,9 @@ class Stack:
   
   def size(self) -> int:
     return len(self.stack_list)
+  
+  def make_empty(self) -> None :
+    self.stack_list = []
 
 def main() -> None:
   pass
