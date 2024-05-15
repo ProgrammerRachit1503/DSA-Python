@@ -5,7 +5,7 @@ class Stack:
   def print_stack(self) -> None :
     print(f"+----Your Stack----+")
     
-    for i in range(len(self.stack_list)-1, 1, -1):
+    for i in range(len(self.stack_list)-1, -1, -1):
       print(self.stack_list[i])
     
     print(f"+------------------+")
