@@ -46,8 +46,7 @@ class Queue:
     return temp
 
 def main() -> None:
-  my_queue = Queue(7)
-  my_queue.print_queue()
+  pass
 
 if __name__ == "__main__" :
   main()
