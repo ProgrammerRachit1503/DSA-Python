@@ -2,16 +2,16 @@ def subarray_sum(nums : list[int], target : int) -> list[int]:
   cur_sum : int = 0
   Map : dict[int : int] = {}
 
-  for i in range(len(nums)):
-    cur_sum += nums[i]
+  for idx, num in enumerate(nums):
+    cur_sum += num
     
-    if ((cur_sum - target) == 0):
-      return [0, i]
+    if cur_sum == target:
+      return [0, idx]
 
     if (cur_sum - target) in Map.keys():
-      return [Map[cur_sum - target] + 1, i]
+      return [Map[cur_sum - target] + 1, idx]
     
-    Map[cur_sum] = i
+    Map[cur_sum] = idx
   
   return []
 

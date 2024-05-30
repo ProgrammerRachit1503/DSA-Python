@@ -1,13 +1,13 @@
 def two_sum(nums : list[int], target : int) -> list[int]:
   Map : dict[int : int] = {}
 
-  for i in range(len(nums)):
-    compliment : int = target - nums[i]
+  for idx, num in enumerate(nums):
+    compliment : int = target - num
 
     if compliment in Map.keys():
-      return [Map[compliment], i]
+      return [Map[compliment], idx]
     
-    Map[nums[i]] = i
+    Map[num] = idx
   
   return []
 
