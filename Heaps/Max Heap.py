@@ -38,11 +38,11 @@ class MaxHeap:
     return max_value
   
   def _sink_down(self, index : int) -> None:
-    max_index : int = self.heap[index]
+    max_index : int = index
 
     while True:
-      left_index : int = self._left_child()
-      right_index : int = self._right_child()
+      left_index : int = self._left_child(index)
+      right_index : int = self._right_child(index)
 
       if (left_index < len(self.heap) and self.heap[left_index] > self.heap[max_index]):
         max_index = left_index
