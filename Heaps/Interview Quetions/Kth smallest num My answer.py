@@ -71,8 +71,6 @@ def find_kth_smallest(nums : list[int], k : int) -> int:
 
   return Heap.remove()
 
-  
-
 
 def main() -> None:
   nums = [[3,2,1,5,6,4], [6,5,4,3,2,1], [1,2,3,4,5,6], [3,2,3,1,2,4,5,5,6]]
