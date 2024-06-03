@@ -46,18 +46,27 @@ class BinarySearchTree:
       else:
         return True
     return False
+  
+  def __r_contains(self, current_node : Node, value : any) -> bool:
+    if current_node == None:
+      return False
+    
+    if value == current_node.value:
+      return True
+    
+    if value < current_node.value:
+      return self.__r_contains(current_node.left, value)
+    
+    if value > current_node.value:
+      return self.__r_contains(current_node.right, value)
+    
+  def r_contains(self, value : any) -> bool:
+    return self.__r_contains(self.root, value)
 
     
 
 def main() -> None:
-  my_tree = BinarySearchTree()
-  my_tree.insert(2)
-  my_tree.insert(1)
-  my_tree.insert(3)
-  print(my_tree.root.value)
-  print(my_tree.root.left.value)
-  print(my_tree.root.right.value)
-  print(my_tree.contains(4))
+  pass
 
 if __name__ == "__main__" :
   main()
