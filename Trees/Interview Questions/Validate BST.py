@@ -126,8 +126,10 @@ class BinarySearchTree:
       
       if current_node.right is not None:
         traverse(current_node.right)
-
-    traverse(self.root)
+    
+    if self.root is not None:
+      traverse(self.root)
+    
     return result
   
   def is_bst_valid(self) -> bool:
@@ -139,17 +141,56 @@ class BinarySearchTree:
     return True
 
 
-def main() -> None:
-  my_tree = BinarySearchTree()
-  my_tree.insert(47)
-  my_tree.insert(21)
-  my_tree.insert(76)
-  my_tree.insert(18)
-  my_tree.insert(27)
-  my_tree.insert(52)
-  my_tree.insert(82)
+def test_is_bst_valid() -> None:
+# Test case 1: Valid BST
+  bst1 = BinarySearchTree()
+  bst1.insert(10)
+  bst1.insert(5)
+  bst1.insert(15)
+  bst1.insert(2)
+  bst1.insert(7)
+  bst1.insert(12)
+  bst1.insert(17)
+  print("Test case 1 (Valid BST):", bst1.is_bst_valid())  # Expected output: True
 
-  print(my_tree.is_bst_valid())
+  # Test case 2: Invalid BST (left child is greater than root)
+  bst2 = BinarySearchTree()
+  bst2.root = Node(10)
+  bst2.root.left = Node(15)
+  bst2.root.right = Node(5)
+  print("Test case 2 (Invalid BST):", bst2.is_bst_valid())  # Expected output: False
+
+  # Test case 3: Invalid BST (right child is less than root)
+  bst3 = BinarySearchTree()
+  bst3.root = Node(10)
+  bst3.root.left = Node(5)
+  bst3.root.right = Node(7)
+  print("Test case 3 (Invalid BST):", bst3.is_bst_valid())  # Expected output: False
+
+  # Test case 4: Single node tree (Valid BST)
+  bst4 = BinarySearchTree()
+  bst4.insert(10)
+  print("Test case 4 (Single node):", bst4.is_bst_valid())  # Expected output: True
+
+  # Test case 5: Empty tree (Valid BST)
+  bst5 = BinarySearchTree()
+  print("Test case 5 (Empty tree):", bst5.is_bst_valid())  # Expected output: True
+
+
+def main() -> None:
+  test_is_bst_valid()
+
 
 if __name__ == "__main__":
   main()
+
+"""
+  EXPECTED OUTPUT:
+  -----------------------------
+  Test case 1 (Valid BST): True
+  Test case 2 (Invalid BST): False
+  Test case 3 (Invalid BST): False
+  Test case 4 (Single node): True
+  Test case 5 (Empty tree): True
+  -----------------------------
+ """

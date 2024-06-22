@@ -127,7 +127,9 @@ class BinarySearchTree:
       if current_node.right is not None:
         traverse(current_node.right)
     
-    traverse(self.root)
+    if self.root is not None:
+      traverse(self.root)
+    
     return result
   
   def DFS_in_order(self) -> list[int]:
@@ -142,7 +144,9 @@ class BinarySearchTree:
       if current_node.right is not None:
         traverse(current_node.right)
 
-    traverse(self.root)
+    if self.root is not None:
+      traverse(self.root)
+    
     return result
   
   def DFS_post_order(self) -> list[int]:
@@ -157,7 +161,9 @@ class BinarySearchTree:
       
       result.append(current_node.value)
     
-    traverse(self.root)
+    if self.root is not None:
+      traverse(self.root)
+    
     return result
 
 
@@ -172,9 +178,18 @@ def main() -> None:
   my_tree.insert(52)
   my_tree.insert(82)
 
-  print(f"Pre Order ==> {my_tree.DFS_pre_order()}")
-  print(f"In Order ==> {my_tree.DFS_in_order()}")
+  print(f"Pre Order  ==> {my_tree.DFS_pre_order()}")
+  print(f"In Order   ==> {my_tree.DFS_in_order()}")
   print(f"Post Order ==> {my_tree.DFS_post_order()}")
 
 if __name__ == "__main__":
   main()
+
+"""
+  EXPECTED OUTPUT:
+  -----------------------------
+  Pre Order  ==> [47, 21, 18, 27, 76, 52, 82]
+  In Order   ==> [18, 21, 27, 47, 52, 76, 82]
+  Post Order ==> [18, 27, 21, 52, 82, 76, 47]
+  -----------------------------
+ """
