@@ -116,7 +116,7 @@ class BinarySearchTree:
     return current_node.value
   
   def DFS_in_order(self) -> list[int]:
-    result = []
+    result : list[int] = []
 
     def traverse(current_node : Node):
       if current_node.left is not None:

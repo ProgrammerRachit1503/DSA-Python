@@ -116,7 +116,7 @@ class BinarySearchTree:
     return current_node.value
   
   def DFS_pre_order(self) -> list[int]:
-    result = []
+    result : list[int] = []
 
     def traverse(current_node : Node):
       result.append(current_node.value)
@@ -131,7 +131,7 @@ class BinarySearchTree:
     return result
   
   def DFS_in_order(self) -> list[int]:
-    result = []
+    result : list[int] = []
 
     def traverse(current_node : Node):
       if current_node.left is not None:
@@ -146,7 +146,7 @@ class BinarySearchTree:
     return result
   
   def DFS_post_order(self) -> list[int]:
-    result = []
+    result : list[int] = []
 
     def traverse(current_node : Node):
       if current_node.left is not None:
