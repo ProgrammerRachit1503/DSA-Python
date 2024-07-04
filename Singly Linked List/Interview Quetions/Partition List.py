@@ -212,5 +212,4 @@ def test_partition_list():
 
 
 if __name__ =="__main__":
-  test_partition_list() 
-      
+  test_partition_list()
