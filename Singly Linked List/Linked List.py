@@ -163,6 +163,31 @@ class LinkedList:
           current.value, current.next.value = current.next.value, current.value
         current = current.next
     return True
+  
+  """
+  Code of bubble sort provided by teacher by udemy and this is better approach but added as comment because this is not written by me.:-
+
+  def bubble_sort(self) -> True:
+    if self.length <= 1:
+      return True
+    
+    sorted_until : Node = None
+    
+    while sorted_until != self.head.next:
+      current : Node = self.head
+      
+      while current.next != sorted_until:
+        next_node : Node = current.next
+        
+        if current.value > next_node.value:
+          current.value, next_node.value = next_node.value, current.value
+        current = current.next
+      
+      sorted_until = current
+    
+    return True
+  
+  """
 
 
 def test_bubble_sort():
