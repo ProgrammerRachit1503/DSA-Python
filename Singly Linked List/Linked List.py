@@ -189,6 +189,28 @@ class LinkedList:
   
   """
 
+  def selection_sort(self) -> bool:
+    if self.length <= 1:
+      return True
+    
+    selected : Node = self.head
+    
+    while selected.next is not None:
+
+      temp : Node = selected.next
+      min_value : Node = selected
+
+      while temp is not None:
+        if min_value.value > temp.value:
+          min_value = temp
+        temp = temp.next
+      
+      if selected != min_value:
+        selected.value, min_value.value = min_value.value, selected.value
+      selected = selected.next
+
+    return True
+
 
 def test_bubble_sort():
   def create_linked_list(values):
@@ -234,6 +256,55 @@ def test_bubble_sort():
   # Test case 6: Random order list
   ll6 = create_linked_list([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])
   ll6.bubble_sort()
+  assert linked_list_to_list(ll6) == [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9], "Test case 6 failed"
+
+  print("All test cases passed!")
+
+
+def test_selection_sort():
+  def create_linked_list(values):
+    ll = LinkedList()
+    for value in values:
+      ll.append(value)
+    return ll
+
+  # Helper function to convert linked list to Python list for easy comparison
+  def linked_list_to_list(ll):
+    result = []
+    current = ll.head
+    while current:
+      result.append(current.value)
+      current = current.next
+    return result
+
+  # Test case 1: Empty list
+  ll1 = create_linked_list([])
+  ll1.selection_sort()
+  assert linked_list_to_list(ll1) == [], "Test case 1 failed"
+
+  # Test case 2: Single element list
+  ll2 = create_linked_list([1])
+  ll2.selection_sort()
+  assert linked_list_to_list(ll2) == [1], "Test case 2 failed"
+
+  # Test case 3: List already sorted
+  ll3 = create_linked_list([1, 2, 3, 4, 5])
+  ll3.selection_sort()
+  assert linked_list_to_list(ll3) == [1, 2, 3, 4, 5], "Test case 3 failed"
+
+  # Test case 4: List sorted in reverse order
+  ll4 = create_linked_list([5, 4, 3, 2, 1])
+  ll4.selection_sort()
+  assert linked_list_to_list(ll4) == [1, 2, 3, 4, 5], "Test case 4 failed"
+
+  # Test case 5: List with duplicate elements
+  ll5 = create_linked_list([4, 2, 2, 3, 1])
+  ll5.selection_sort()
+  assert linked_list_to_list(ll5) == [1, 2, 2, 3, 4], "Test case 5 failed"
+
+  # Test case 6: Random order list
+  ll6 = create_linked_list([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])
+  ll6.selection_sort()
   assert linked_list_to_list(ll6) == [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9], "Test case 6 failed"
 
   print("All test cases passed!")
