@@ -224,7 +224,7 @@ class LinkedList:
 
       while cur.value > temp.next.value:
         temp = temp.next
-        
+
       prev.next = cur.next
       cur.next = temp.next
       temp.next = cur
@@ -236,22 +236,23 @@ class LinkedList:
     self.head = dummy_node.next
 
 
+def create_linked_list(values):
+  ll = LinkedList()
+  for value in values:
+    ll.append(value)
+  return ll
+
+# Helper function to convert linked list to Python list for easy comparison
+def linked_list_to_list(ll):
+  result = []
+  current = ll.head
+  while current:
+    result.append(current.value)
+    current = current.next
+  return result
+
+
 def test_bubble_sort():
-  def create_linked_list(values):
-    ll = LinkedList()
-    for value in values:
-      ll.append(value)
-    return ll
-
-  # Helper function to convert linked list to Python list for easy comparison
-  def linked_list_to_list(ll):
-    result = []
-    current = ll.head
-    while current:
-      result.append(current.value)
-      current = current.next
-    return result
-
   # Test case 1: Empty list
   ll1 = create_linked_list([])
   ll1.bubble_sort()
@@ -286,21 +287,6 @@ def test_bubble_sort():
 
 
 def test_selection_sort():
-  def create_linked_list(values):
-    ll = LinkedList()
-    for value in values:
-      ll.append(value)
-    return ll
-
-  # Helper function to convert linked list to Python list for easy comparison
-  def linked_list_to_list(ll):
-    result = []
-    current = ll.head
-    while current:
-      result.append(current.value)
-      current = current.next
-    return result
-
   # Test case 1: Empty list
   ll1 = create_linked_list([])
   ll1.selection_sort()
@@ -335,21 +321,6 @@ def test_selection_sort():
 
 
 def test_insertion_sort():
-  def create_linked_list(values):
-    ll = LinkedList()
-    for value in values:
-      ll.append(value)
-    return ll
-
-  # Helper function to convert linked list to Python list for easy comparison
-  def linked_list_to_list(ll):
-    result = []
-    current = ll.head
-    while current:
-      result.append(current.value)
-      current = current.next
-    return result
-
   # Test case 1: Empty list
   ll1 = create_linked_list([])
   ll1.insertion_sort()
