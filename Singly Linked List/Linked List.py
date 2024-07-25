@@ -228,7 +228,7 @@ class LinkedList:
       prev.next = cur.next
       cur.next = temp.next
       temp.next = cur
-      
+
       if prev.next is None:
         self.tail = cur
       cur = prev.next
