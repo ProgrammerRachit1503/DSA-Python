@@ -10,7 +10,7 @@ class DoublyLinkedList:
     self.head : Node = new_node
     self.tail : Node = new_node
     self.length : int = 1
-   
+
   def print_list(self) -> None:
     temp : Node = self.head
     
