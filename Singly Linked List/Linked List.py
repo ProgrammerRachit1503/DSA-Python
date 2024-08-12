@@ -1,15 +1,15 @@
 class Node:
-  def __init__(self, value : any = None, next = None) -> None:
+  def __init__(self, value : any = 0, next = None) -> None:
     self.value : any = value
     self.next : Node = next
 
 class LinkedList:
   def __init__(self, value : any = None) -> None:
-    if value:
+    if value is not None:
       new_node : Node = Node(value)
-    self.head : Node = new_node if value else None
-    self.tail : Node = new_node if value else None
-    self.length : int = 1 if value else 0
+    self.head : Node = new_node if value is not None else None
+    self.tail : Node = new_node if value is not None else None
+    self.length : int = 1 if value is not None else 0
   
   def print_list(self) -> None:
     temp : Node = self.head
@@ -57,8 +57,7 @@ class LinkedList:
     return temp
 
   def prepend(self, value : any) -> bool:
-    new_node : Node = Node(value)
-    new_node.next = self.head
+    new_node : Node = Node(value, self.head)
     self.head = new_node
 
     if self.tail is None:
@@ -235,15 +234,41 @@ class LinkedList:
 
     self.head = dummy_node.next
 
+  # Type annotation is giving error but other_list should be linked List.
+  def merge(self, other_list) -> None:
+    other_head : Node = other_list.head
+    dummy : Node = Node()
+    current = dummy
+    
+    while self.head is not None and other_head is not None:
+      if self.head.value < other_head.value:
+        current.next = self.head
+        self.head = self.head.next
+      
+      else:
+        current.next = other_head
+        other_head = other_head.next
+      
+      current = current.next
+    
+    if self.head is not None:
+      current.next = self.head
+    
+    else:
+      current.next = other_head
+      self.tail = other_list.tail
+    
+    self.head = dummy.next
+    self.length += other_list.length
 
-def create_linked_list(values):
+
+def create_linked_list(values : list):
   ll = LinkedList()
   for value in values:
     ll.append(value)
   return ll
 
-# Helper function to convert linked list to Python list for easy comparison
-def linked_list_to_list(ll):
+def linked_list_to_list(ll : LinkedList):
   result = []
   current = ll.head
   while current:
@@ -356,7 +381,6 @@ def test_insertion_sort():
 
 def main() -> None:
   pass
-
 
 if __name__ == "__main__":
   main()
