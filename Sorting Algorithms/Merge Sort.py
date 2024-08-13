@@ -1,7 +1,7 @@
 import random
 
 
-def merge(list1 : list[int], list2 : list[int]) -> list[int]:
+def __merge__(list1 : list[int], list2 : list[int]) -> list[int]:
   combined : list[int] = []
   i = j = 0
 
@@ -33,7 +33,7 @@ def merge_sort(my_list : list[int]) -> list[int]:
   left : list[int] = merge_sort(my_list[:mid_index])
   right : list[int] = merge_sort(my_list[mid_index:])
   
-  return merge(left, right)
+  return __merge__(left, right)
 
 
 def test_merge_sort() -> None:
