@@ -1,15 +1,15 @@
-def selection_sort(my_list : list[int]) -> list[int]:
-  for i in range(len(my_list) - 1):
-    min_index : int = i
-    
-    for j in range(i + 1, len(my_list)):
-      if my_list[j] < my_list[min_index]:
-        min_index = j
-    
-    if i != min_index:
-      my_list[i], my_list[min_index] = my_list[min_index], my_list[i]
+def selection_sort(my_list: list[int]) -> list[int]:
+    for i in range(len(my_list) - 1):
+        min_index: int = i
 
-  return my_list
+        for j in range(i + 1, len(my_list)):
+            if my_list[j] < my_list[min_index]:
+                min_index = j
+
+        if i != min_index:
+            my_list[i], my_list[min_index] = my_list[min_index], my_list[i]
+
+    return my_list
 
 
 def test_selection_sort() -> ModuleNotFoundError:
@@ -29,13 +29,16 @@ def test_selection_sort() -> ModuleNotFoundError:
     assert selection_sort([4, 2, 2, 3, 1]) == [1, 2, 2, 3, 4], "Test case 5 failed"
 
     # Test case 6: Random order list
-    assert selection_sort([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]) == [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9], "Test case 6 failed"
+    testcase6 = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+    solution6 = [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
+    assert selection_sort(testcase6) == solution6, "Test case 6 failed"
 
     print("All test cases passed!")
 
 
 def main() -> None:
-  test_selection_sort()
+    test_selection_sort()
 
-if __name__ == "__main__" :
-  main()
+
+if __name__ == "__main__":
+    main()

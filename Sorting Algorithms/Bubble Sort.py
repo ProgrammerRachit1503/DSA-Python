@@ -27,7 +27,9 @@ def test_bubble_sort() -> None:
     assert bubble_sort([4, 2, 2, 3, 1]) == [1, 2, 2, 3, 4], "Test case 5 failed"
 
     # Test case 6: Random order list
-    assert bubble_sort([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]) == [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9], "Test case 6 failed"
+    testcase6 = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+    solution6 = [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
+    assert bubble_sort(testcase6) == solution6, "Test case 6 failed"
 
     print("All test cases passed!")
 

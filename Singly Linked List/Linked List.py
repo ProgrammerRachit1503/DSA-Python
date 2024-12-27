@@ -1,171 +1,175 @@
 class Node:
-  def __init__(self, value : any = 0, next = None) -> None:
-    self.value : any = value
-    self.next : Node = next
+    def __init__(self, value: any = 0, next=None) -> None:
+        self.value: any = value
+        self.next: Node = next
+
 
 class LinkedList:
-  def __init__(self, value : any = None) -> None:
-    if value is not None:
-      new_node : Node = Node(value)
-    self.head : Node = new_node if value is not None else None
-    self.tail : Node = new_node if value is not None else None
-    self.length : int = 1 if value is not None else 0
-  
-  def print_list(self) -> None:
-    temp : Node = self.head
-    
-    while temp is not None:
-      print(temp.value, end=" -> ")
-      temp = temp.next
-    
-    print(None)
+    def __init__(self, value: any = None) -> None:
+        if value is not None:
+            new_node: Node = Node(value)
+        self.head: Node = new_node if value is not None else None
+        self.tail: Node = new_node if value is not None else None
+        self.length: int = 1 if value is not None else 0
 
-  def append(self, value : any) -> bool:
-    new_node : Node = Node(value)
-    
-    if self.head is None:
-      self.head = new_node
-      self.tail = new_node
+    def print_list(self) -> None:
+        temp: Node = self.head
 
-    else: 
-      self.tail.next = new_node
-      self.tail = new_node
+        while temp is not None:
+            print(temp.value, end=" -> ")
+            temp = temp.next
 
-    self.length += 1
-    return True
+        print(None)
 
-  def pop(self) -> Node:
-    if self.length == 0:
-      return None
+    def append(self, value: any) -> bool:
+        new_node: Node = Node(value)
 
-    temp : Node = self.head
-    prev : Node = self.head
+        if self.head is None:
+            self.head = new_node
+            self.tail = new_node
 
-    if self.length == 1:
-      self.head = None
-      self.tail = None
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
 
-    else:
-      while(temp.next):
-        prev = temp
-        temp = temp.next
+        self.length += 1
+        return True
 
-      self.tail = prev
-      self.tail.next = None
+    def pop(self) -> Node:
+        if self.length == 0:
+            return None
 
-    self.length -= 1
-    return temp
+        temp: Node = self.head
+        prev: Node = self.head
 
-  def prepend(self, value : any) -> bool:
-    new_node : Node = Node(value, self.head)
-    self.head = new_node
+        if self.length == 1:
+            self.head = None
+            self.tail = None
 
-    if self.tail is None:
-      self.tail = new_node
+        else:
+            while temp.next:
+                prev = temp
+                temp = temp.next
 
-    self.length += 1
-    return True
+            self.tail = prev
+            self.tail.next = None
 
-  def pop_first(self) -> Node:
-    if self.length == 0:
-      return None
+        self.length -= 1
+        return temp
 
-    temp : Node = self.head
-    if self.length == 1:
-      self.tail = None
+    def prepend(self, value: any) -> bool:
+        new_node: Node = Node(value, self.head)
+        self.head = new_node
 
-    else: 
-      self.head = self.head.next
-      temp.next = None
-      self.length -= 1
-    return temp
+        if self.tail is None:
+            self.tail = new_node
 
-  def get(self, index : int) -> Node:
-    if index >= self.length or index < 0:
-      return None
+        self.length += 1
+        return True
 
-    temp : Node = self.head
-    for _ in range(index):
-      temp = temp.next
+    def pop_first(self) -> Node:
+        if self.length == 0:
+            return None
 
-    return temp
+        temp: Node = self.head
+        if self.length == 1:
+            self.tail = None
 
-  def set_value(self, index : int, value : any) -> bool:
-    temp : Node = self.get(index)
+        else:
+            self.head = self.head.next
+            temp.next = None
+            self.length -= 1
+        return temp
 
-    if temp:
-      temp.value = value
-      return True
-    return False
+    def get(self, index: int) -> Node:
+        if index >= self.length or index < 0:
+            return None
 
-  def insert(self, index: int, value : any) -> bool:
-    if index > self.length or index < 0:
-      return False
+        temp: Node = self.head
+        for _ in range(index):
+            temp = temp.next
 
-    if index == 0:
-      return self.prepend(value)
+        return temp
 
-    if index == self.length:
-      return self.append(value)
+    def set_value(self, index: int, value: any) -> bool:
+        temp: Node = self.get(index)
 
-    new_node : Node = Node(value)
-    temp : Node = self.get(index - 1)
-    new_node.next = temp.next
-    temp.next = new_node
-    
-    self.length += 1
-    return True
+        if temp:
+            temp.value = value
+            return True
+        return False
 
-  def remove(self, index : int) -> Node:
-    if index >= self.length or index < 0:
-      return None
+    def insert(self, index: int, value: any) -> bool:
+        if index > self.length or index < 0:
+            return False
 
-    if index == 0:
-      return self.pop_first()
+        if index == 0:
+            return self.prepend(value)
 
-    if index == (self.length - 1):
-      return self.pop()
+        if index == self.length:
+            return self.append(value)
 
-    prev : Node = self.get(index - 1)
-    temp : Node = prev.next
-    prev.next = temp.next
-    temp.next = None
+        new_node: Node = Node(value)
+        temp: Node = self.get(index - 1)
+        new_node.next = temp.next
+        temp.next = new_node
 
-    self.length -= 1
-    return temp
+        self.length += 1
+        return True
 
-  def reverse(self) -> None:
-    temp : Node = self.head
-    self.head = self.tail
-    self.tail = temp
-    
-    after : Node = temp.next
-    before : Node = None
-    for _ in range(self.length):
-      after = temp.next
-      temp.next = before
-      before = temp
-      temp = after
+    def remove(self, index: int) -> Node:
+        if index >= self.length or index < 0:
+            return None
 
-  def make_empty(self) -> None:
-    self.head = None
-    self.tail = None
-    self.length = 0
+        if index == 0:
+            return self.pop_first()
 
-  # My code for bubble sort.
-  def bubble_sort(self) -> None:
-    if self.length <= 1:
-      return    
-    for i in range(self.length - 1, 0, -1):
-      current = self.head
+        if index == (self.length - 1):
+            return self.pop()
 
-      for _ in range(i):
-        if current.next and current.value > current.next.value:
-          current.value, current.next.value = current.next.value, current.value
+        prev: Node = self.get(index - 1)
+        temp: Node = prev.next
+        prev.next = temp.next
+        temp.next = None
 
-        current = current.next
-  
-  """
+        self.length -= 1
+        return temp
+
+    def reverse(self) -> None:
+        temp: Node = self.head
+        self.head = self.tail
+        self.tail = temp
+
+        after: Node = temp.next
+        before: Node = None
+        for _ in range(self.length):
+            after = temp.next
+            temp.next = before
+            before = temp
+            temp = after
+
+    def make_empty(self) -> None:
+        self.head = None
+        self.tail = None
+        self.length = 0
+
+    # My code for bubble sort.
+    def bubble_sort(self) -> None:
+        if self.length <= 1:
+            return
+        for i in range(self.length - 1, 0, -1):
+            current = self.head
+
+            for _ in range(i):
+                if current.next and current.value > current.next.value:
+                    current.value, current.next.value = (
+                        current.next.value,
+                        current.value,
+                    )
+
+                current = current.next
+
+    """
   Code of bubble sort provided by teacher on udemy and this is better approach but added as comment because this is not my solution.:-
 
   def bubble_sort(self) -> None:
@@ -187,200 +191,205 @@ class LinkedList:
       sorted_until = current  
   """
 
-  def selection_sort(self) -> None:
-    if self.length <= 1:
-      return
-    
-    selected : Node = self.head
-    
-    while selected.next is not None:
+    def selection_sort(self) -> None:
+        if self.length <= 1:
+            return
 
-      temp : Node = selected.next
-      min_value : Node = selected
+        selected: Node = self.head
 
-      while temp is not None:
-        if min_value.value > temp.value:
-          min_value = temp
-        temp = temp.next
-      
-      if selected != min_value:
-        selected.value, min_value.value = min_value.value, selected.value
-      selected = selected.next
+        while selected.next is not None:
 
-  def insertion_sort(self) -> None:
-    if self.length <= 1:
-      return
+            temp: Node = selected.next
+            min_value: Node = selected
 
-    dummy_node = Node(next = self.head)
-    prev, cur = self.head, self.head.next
+            while temp is not None:
+                if min_value.value > temp.value:
+                    min_value = temp
+                temp = temp.next
 
-    while cur:
-      if cur.value >= prev.value:
-        prev, cur = cur, cur.next
-        continue
+            if selected != min_value:
+                selected.value, min_value.value = min_value.value, selected.value
+            selected = selected.next
 
-      temp = dummy_node
+    def insertion_sort(self) -> None:
+        if self.length <= 1:
+            return
 
-      while cur.value > temp.next.value:
-        temp = temp.next
+        dummy_node = Node(next=self.head)
+        prev, cur = self.head, self.head.next
 
-      prev.next = cur.next
-      cur.next = temp.next
-      temp.next = cur
+        while cur:
+            if cur.value >= prev.value:
+                prev, cur = cur, cur.next
+                continue
 
-      if prev.next is None:
-        self.tail = cur
-      cur = prev.next
+            temp = dummy_node
 
-    self.head = dummy_node.next
+            while cur.value > temp.next.value:
+                temp = temp.next
 
-  # Type annotation is giving error but other_list should be linked List.
-  def merge(self, other_list) -> None:
-    other_head : Node = other_list.head
-    dummy : Node = Node()
-    current = dummy
-    
-    while self.head is not None and other_head is not None:
-      if self.head.value < other_head.value:
-        current.next = self.head
-        self.head = self.head.next
-      
-      else:
-        current.next = other_head
-        other_head = other_head.next
-      
-      current = current.next
-    
-    if self.head is not None:
-      current.next = self.head
-    
-    else:
-      current.next = other_head
-      self.tail = other_list.tail
-    
-    self.head = dummy.next
-    self.length += other_list.length
+            prev.next = cur.next
+            cur.next = temp.next
+            temp.next = cur
+
+            if prev.next is None:
+                self.tail = cur
+            cur = prev.next
+
+        self.head = dummy_node.next
+
+    # Type annotation is giving error but other_list should be linked List.
+    def merge(self, other_list) -> None:
+        other_head: Node = other_list.head
+        dummy: Node = Node()
+        current = dummy
+
+        while self.head is not None and other_head is not None:
+            if self.head.value < other_head.value:
+                current.next = self.head
+                self.head = self.head.next
+
+            else:
+                current.next = other_head
+                other_head = other_head.next
+
+            current = current.next
+
+        if self.head is not None:
+            current.next = self.head
+
+        else:
+            current.next = other_head
+            self.tail = other_list.tail
+
+        self.head = dummy.next
+        self.length += other_list.length
 
 
-def create_linked_list(values : list):
-  ll = LinkedList()
-  for value in values:
-    ll.append(value)
-  return ll
+def create_linked_list(values: list):
+    ll = LinkedList()
+    for value in values:
+        ll.append(value)
+    return ll
 
-def linked_list_to_list(ll : LinkedList):
-  result = []
-  current = ll.head
-  while current:
-    result.append(current.value)
-    current = current.next
-  return result
+
+def linked_list_to_list(ll: LinkedList):
+    result = []
+    current = ll.head
+    while current:
+        result.append(current.value)
+        current = current.next
+    return result
 
 
 def test_bubble_sort():
-  # Test case 1: Empty list
-  ll1 = create_linked_list([])
-  ll1.bubble_sort()
-  assert linked_list_to_list(ll1) == [], "Test case 1 failed"
+    # Test case 1: Empty list
+    ll1 = create_linked_list([])
+    ll1.bubble_sort()
+    assert linked_list_to_list(ll1) == [], "Test case 1 failed"
 
-  # Test case 2: Single element list
-  ll2 = create_linked_list([1])
-  ll2.bubble_sort()
-  assert linked_list_to_list(ll2) == [1], "Test case 2 failed"
+    # Test case 2: Single element list
+    ll2 = create_linked_list([1])
+    ll2.bubble_sort()
+    assert linked_list_to_list(ll2) == [1], "Test case 2 failed"
 
-  # Test case 3: List already sorted
-  ll3 = create_linked_list([1, 2, 3, 4, 5])
-  ll3.bubble_sort()
-  assert linked_list_to_list(ll3) == [1, 2, 3, 4, 5], "Test case 3 failed"
+    # Test case 3: List already sorted
+    ll3 = create_linked_list([1, 2, 3, 4, 5])
+    ll3.bubble_sort()
+    assert linked_list_to_list(ll3) == [1, 2, 3, 4, 5], "Test case 3 failed"
 
-  # Test case 4: List sorted in reverse order
-  ll4 = create_linked_list([5, 4, 3, 2, 1])
-  ll4.bubble_sort()
-  assert linked_list_to_list(ll4) == [1, 2, 3, 4, 5], "Test case 4 failed"
+    # Test case 4: List sorted in reverse order
+    ll4 = create_linked_list([5, 4, 3, 2, 1])
+    ll4.bubble_sort()
+    assert linked_list_to_list(ll4) == [1, 2, 3, 4, 5], "Test case 4 failed"
 
-  # Test case 5: List with duplicate elements
-  ll5 = create_linked_list([4, 2, 2, 3, 1])
-  ll5.bubble_sort()
-  assert linked_list_to_list(ll5) == [1, 2, 2, 3, 4], "Test case 5 failed"
+    # Test case 5: List with duplicate elements
+    ll5 = create_linked_list([4, 2, 2, 3, 1])
+    ll5.bubble_sort()
+    assert linked_list_to_list(ll5) == [1, 2, 2, 3, 4], "Test case 5 failed"
 
-  # Test case 6: Random order list
-  ll6 = create_linked_list([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])
-  ll6.bubble_sort()
-  assert linked_list_to_list(ll6) == [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9], "Test case 6 failed"
+    # Test case 6: Random order list
+    ll6 = create_linked_list([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])
+    ll6.bubble_sort()
+    solution6 = [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
+    assert linked_list_to_list(ll6) == solution6, "Test case 6 failed"
 
-  print("All test cases passed!")
+    print("All test cases passed!")
 
 
 def test_selection_sort():
-  # Test case 1: Empty list
-  ll1 = create_linked_list([])
-  ll1.selection_sort()
-  assert linked_list_to_list(ll1) == [], "Test case 1 failed"
+    # Test case 1: Empty list
+    ll1 = create_linked_list([])
+    ll1.selection_sort()
+    assert linked_list_to_list(ll1) == [], "Test case 1 failed"
 
-  # Test case 2: Single element list
-  ll2 = create_linked_list([1])
-  ll2.selection_sort()
-  assert linked_list_to_list(ll2) == [1], "Test case 2 failed"
+    # Test case 2: Single element list
+    ll2 = create_linked_list([1])
+    ll2.selection_sort()
+    assert linked_list_to_list(ll2) == [1], "Test case 2 failed"
 
-  # Test case 3: List already sorted
-  ll3 = create_linked_list([1, 2, 3, 4, 5])
-  ll3.selection_sort()
-  assert linked_list_to_list(ll3) == [1, 2, 3, 4, 5], "Test case 3 failed"
+    # Test case 3: List already sorted
+    ll3 = create_linked_list([1, 2, 3, 4, 5])
+    ll3.selection_sort()
+    assert linked_list_to_list(ll3) == [1, 2, 3, 4, 5], "Test case 3 failed"
 
-  # Test case 4: List sorted in reverse order
-  ll4 = create_linked_list([5, 4, 3, 2, 1])
-  ll4.selection_sort()
-  assert linked_list_to_list(ll4) == [1, 2, 3, 4, 5], "Test case 4 failed"
+    # Test case 4: List sorted in reverse order
+    ll4 = create_linked_list([5, 4, 3, 2, 1])
+    ll4.selection_sort()
+    assert linked_list_to_list(ll4) == [1, 2, 3, 4, 5], "Test case 4 failed"
 
-  # Test case 5: List with duplicate elements
-  ll5 = create_linked_list([4, 2, 2, 3, 1])
-  ll5.selection_sort()
-  assert linked_list_to_list(ll5) == [1, 2, 2, 3, 4], "Test case 5 failed"
+    # Test case 5: List with duplicate elements
+    ll5 = create_linked_list([4, 2, 2, 3, 1])
+    ll5.selection_sort()
+    assert linked_list_to_list(ll5) == [1, 2, 2, 3, 4], "Test case 5 failed"
 
-  # Test case 6: Random order list
-  ll6 = create_linked_list([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])
-  ll6.selection_sort()
-  assert linked_list_to_list(ll6) == [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9], "Test case 6 failed"
+    # Test case 6: Random order list
+    ll6 = create_linked_list([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])
+    ll6.selection_sort()
+    solution6 = [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
+    assert linked_list_to_list(ll6) == solution6, "Test case 6 failed"
 
-  print("All test cases passed!")
+    print("All test cases passed!")
 
 
 def test_insertion_sort():
-  # Test case 1: Empty list
-  ll1 = create_linked_list([])
-  ll1.insertion_sort()
-  assert linked_list_to_list(ll1) == [], "Test case 1 failed"
+    # Test case 1: Empty list
+    ll1 = create_linked_list([])
+    ll1.insertion_sort()
+    assert linked_list_to_list(ll1) == [], "Test case 1 failed"
 
-  # Test case 2: Single element list
-  ll2 = create_linked_list([1])
-  ll2.insertion_sort()
-  assert linked_list_to_list(ll2) == [1], "Test case 2 failed"
+    # Test case 2: Single element list
+    ll2 = create_linked_list([1])
+    ll2.insertion_sort()
+    assert linked_list_to_list(ll2) == [1], "Test case 2 failed"
 
-  # Test case 3: List already sorted
-  ll3 = create_linked_list([1, 2, 3, 4, 5])
-  ll3.insertion_sort()
-  assert linked_list_to_list(ll3) == [1, 2, 3, 4, 5], "Test case 3 failed"
+    # Test case 3: List already sorted
+    ll3 = create_linked_list([1, 2, 3, 4, 5])
+    ll3.insertion_sort()
+    assert linked_list_to_list(ll3) == [1, 2, 3, 4, 5], "Test case 3 failed"
 
-  # Test case 4: List sorted in reverse order
-  ll4 = create_linked_list([5, 4, 3, 2, 1])
-  ll4.insertion_sort()
-  assert linked_list_to_list(ll4) == [1, 2, 3, 4, 5], "Test case 4 failed"
+    # Test case 4: List sorted in reverse order
+    ll4 = create_linked_list([5, 4, 3, 2, 1])
+    ll4.insertion_sort()
+    assert linked_list_to_list(ll4) == [1, 2, 3, 4, 5], "Test case 4 failed"
 
-  # Test case 5: List with duplicate elements
-  ll5 = create_linked_list([4, 2, 2, 3, 1])
-  ll5.insertion_sort()
-  assert linked_list_to_list(ll5) == [1, 2, 2, 3, 4], "Test case 5 failed"
+    # Test case 5: List with duplicate elements
+    ll5 = create_linked_list([4, 2, 2, 3, 1])
+    ll5.insertion_sort()
+    assert linked_list_to_list(ll5) == [1, 2, 2, 3, 4], "Test case 5 failed"
 
-  # Test case 6: Random order list
-  ll6 = create_linked_list([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])
-  ll6.insertion_sort()
-  assert linked_list_to_list(ll6) == [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9], "Test case 6 failed"
+    # Test case 6: Random order list
+    ll6 = create_linked_list([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])
+    ll6.insertion_sort()
+    solution6 = [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
+    assert linked_list_to_list(ll6) == solution6, "Test case 6 failed"
 
-  print("All test cases passed!")
+    print("All test cases passed!")
 
 
 def main() -> None:
-  pass
+    pass
+
 
 if __name__ == "__main__":
-  main()
+    main()
