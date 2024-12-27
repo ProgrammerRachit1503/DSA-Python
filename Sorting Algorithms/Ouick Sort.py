@@ -27,6 +27,30 @@ def quick_sort(my_list):
     return __quick_sort_helper__(my_list, 0, len(my_list) - 1)
 
 
+def test_quick_sort() -> ModuleNotFoundError:
+    # Test case 1: Empty list
+    assert quick_sort([]) == [], "Test case 1 failed"
+
+    # Test case 2: Single element list
+    assert quick_sort([1]) == [1], "Test case 2 failed"
+
+    # Test case 3: List already sorted
+    assert quick_sort([1, 2, 3, 4, 5]) == [1, 2, 3, 4, 5], "Test case 3 failed"
+
+    # Test case 4: List sorted in reverse order
+    assert quick_sort([5, 4, 3, 2, 1]) == [1, 2, 3, 4, 5], "Test case 4 failed"
+
+    # Test case 5: List with duplicate elements
+    assert quick_sort([4, 2, 2, 3, 1]) == [1, 2, 2, 3, 4], "Test case 5 failed"
+
+    # Test case 6: Random order list
+    testcase6 = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+    solution6 = [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
+    assert quick_sort(testcase6) == solution6, "Test case 6 failed"
+
+    print("All test cases passed!")
+
+
 def main() -> None:
     pass
 
