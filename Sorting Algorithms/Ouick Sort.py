@@ -52,7 +52,7 @@ def test_quick_sort() -> ModuleNotFoundError:
 
 
 def main() -> None:
-    pass
+    test_quick_sort()
 
 
 if __name__ == "__main__":
