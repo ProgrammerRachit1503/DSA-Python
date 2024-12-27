@@ -12,7 +12,7 @@ def selection_sort(my_list: list[int]) -> list[int]:
     return my_list
 
 
-def test_selection_sort() -> ModuleNotFoundError:
+def test_selection_sort() -> None:
     # Test case 1: Empty list
     assert selection_sort([]) == [], "Test case 1 failed"
 

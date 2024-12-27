@@ -27,7 +27,7 @@ def quick_sort(my_list):
     return __quick_sort_helper__(my_list, 0, len(my_list) - 1)
 
 
-def test_quick_sort() -> ModuleNotFoundError:
+def test_quick_sort() -> None:
     # Test case 1: Empty list
     assert quick_sort([]) == [], "Test case 1 failed"
 
