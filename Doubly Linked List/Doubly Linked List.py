@@ -1,16 +1,20 @@
 class Node:
-    def __init__(self, value: any) -> None:
-        self.value: any = value
+    def __init__(self, value: int) -> None:
+        self.value: int = value
         self.next: Node = None
         self.prev: Node = None
 
 
 class DoublyLinkedList:
-    def __init__(self, value: any) -> None:
-        new_node: Node = Node(value)
-        self.head: Node = new_node
-        self.tail: Node = new_node
-        self.length: int = 1
+    def __init__(self, value : int = None) -> None:
+        if value is None:
+            self.head : Node = None
+            self.tail : Node = None
+        else:
+            new_node = Node(value)
+            self.head : Node = new_node
+            self.tail : Node = new_node
+        self.length : int = 1 if value is not None else 0
 
     def print_list(self) -> None:
         temp: Node = self.head
@@ -18,9 +22,9 @@ class DoublyLinkedList:
         while temp is not None:
             print(temp.value, end=" <-> ")
             temp = temp.next
-        print(None)
+        # print(None)
 
-    def append(self, value: any) -> bool:
+    def append(self, value: int) -> bool:
         new_node: Node = Node(value)
 
         if self.head is None:
@@ -53,7 +57,7 @@ class DoublyLinkedList:
         self.length -= 1
         return temp
 
-    def prepend(self, value: any) -> bool:
+    def prepend(self, value: int) -> bool:
         new_node: Node = Node(value)
 
         if self.head is None:
@@ -102,7 +106,7 @@ class DoublyLinkedList:
 
         return temp
 
-    def set_value(self, index: int, value: any) -> bool:
+    def set_value(self, index: int, value: int) -> bool:
         temp = self.get(index)
         if temp:
             temp.value = value

@@ -1,16 +1,20 @@
 class Node:
-    def __init__(self, value):
+    def __init__(self, value) -> None:
         self.value = value
         self.next = None
         self.prev = None
 
 
 class DoublyLinkedList:
-    def __init__(self, value):
-        new_node = Node(value)
-        self.head = new_node
-        self.tail = new_node
-        self.length = 1
+    def __init__(self, value = None) -> None:
+        if value is None:
+            self.head = None
+            self.tail = None
+        else:
+            new_node = Node(value)
+            self.head = new_node
+            self.tail = new_node
+        self.length = 1 if value is not None else 0
 
     def print_list(self) -> None:
         temp: Node = self.head
@@ -21,7 +25,7 @@ class DoublyLinkedList:
         print(temp.value)
         # print(None)
 
-    def append(self, value):
+    def append(self, value) -> bool:
         new_node = Node(value)
         if self.head is None:
             self.head = new_node
@@ -38,7 +42,7 @@ class DoublyLinkedList:
             return False
 
         if self.length == 1:
-            pass
+            return True
 
         else:
             temp: Node = self.head
@@ -52,19 +56,7 @@ class DoublyLinkedList:
 
 
 def main() -> None:
-    my_doubly_linked_list = DoublyLinkedList(1)
-    my_doubly_linked_list.append(2)
-    my_doubly_linked_list.append(3)
-    my_doubly_linked_list.append(4)
-    my_doubly_linked_list.append(5)
-
-    print("DLL before reverse():")
-    my_doubly_linked_list.print_list()
-
-    my_doubly_linked_list.reverse()
-
-    print("\nDLL after reverse():")
-    my_doubly_linked_list.print_list()
+    pass
 
 
 if __name__ == "__main__":
