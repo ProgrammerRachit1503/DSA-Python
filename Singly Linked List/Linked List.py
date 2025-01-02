@@ -153,7 +153,7 @@ class LinkedList:
         self.tail = None
         self.length = 0
 
-    # My code for bubble sort.
+    # Teacher's code for bubble sort.
     def bubble_sort(self) -> None:
         if self.length <= 1:
             return
@@ -169,27 +169,24 @@ class LinkedList:
 
                 current = current.next
 
-    """
-  Code of bubble sort provided by teacher on udemy and this is better approach but added as comment because this is not my solution.:-
+    # My code for bubble sort.
+    def my_bubble_sort(self) -> None:
+        if self.length <= 1:
+            return
 
-  def bubble_sort(self) -> None:
-    if self.length <= 1:
-      return
+        sorted_until: Node = None
 
-    sorted_until : Node = None
+        while sorted_until != self.head.next:
+            current: Node = self.head
 
-    while sorted_until != self.head.next:
-      current : Node = self.head
+            while current.next != sorted_until:
+                next_node: Node = current.next
 
-      while current.next != sorted_until:
-        next_node : Node = current.next
+                if current.value > next_node.value:
+                    current.value, next_node.value = next_node.value, current.value
+                    current = current.next
 
-        if current.value > next_node.value:
-          current.value, next_node.value = next_node.value, current.value
-        current = current.next
-
-      sorted_until = current  
-  """
+            sorted_until = current
 
     def selection_sort(self) -> None:
         if self.length <= 1:
